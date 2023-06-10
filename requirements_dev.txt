@@ -1,10 +1,27 @@
-pytest>=2.8.5, <6
 numpy>=1.8, <2
 scipy>=1.1, <2
 cython>=0.25, <1
 plotly>=3
-sphinx>=1.4.5, <2
 sphinx-rtd-theme>=0.1.9
 sphinxcontrib-napoleon>=0.5.3
 mock>=2.0.0, <3
 pytest-cov>=2.2.1, <3
+pip
+bump2version
+wheel
+coverage
+Sphinx
+twine
+coveralls
+py
+pytest
+pytest-runner
+python_docs_theme
+pandas
+pytest-qt
+pytest-mock
+pytest-xvfb
+typing_extensions
+pyinstaller
+pyinstaller-hooks-contrib
+rst-to-myst
