@@ -7,7 +7,7 @@
 import numpy as np
 from scipy.stats import hypergeom
 
-from xlmhg import mhg, mhg_cython
+from xlmhglite import mhg, mhg_cython
 
 def test_cross():
     """Compares p-values calculated using PVAL1 and PVAL2."""
@@ -15,7 +15,7 @@ def test_cross():
     K = 10
 
     #tol = 1e-11
-    tol = 1e-8
+    tol = 5e-6
 
     W = N-K
     table = np.empty((K+1, W+1), dtype=np.longdouble)

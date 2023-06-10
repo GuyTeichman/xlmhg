@@ -72,7 +72,7 @@ before_script:
   - pip install --upgrade pytest pytest-cov codecov scipy
 script:
   # run tests
-  - py.test --cov=xlmhg --cov-report=xml tests/
+  - py.test --cov=xlmhglite --cov-report=xml tests/
 after_success:
   - ./tools/travis_build_wheels.sh
 notifications:
@@ -82,7 +82,7 @@ notifications:
 deploy:
   provider: pypi
   user: flo-compbio
-  repo: flo-compbio/xlmhg
+  repo: flo-compbio/xlmhglite
   skip_cleanup: true
   distributions: "sdist"  # binary  distributions were already built earlier
   password:

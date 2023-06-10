@@ -7,9 +7,9 @@
 import numpy as np
 from scipy.stats import hypergeom
 
-from xlmhg import mhg
-from xlmhg import mhg_cython
-from xlmhg import test
+from xlmhglite import mhg
+from xlmhglite import mhg_cython
+from xlmhglite import test
 
 
 def calculate_bound(N, K, X, L, stat, S):

@@ -6,38 +6,11 @@
 
 import itertools as it
 
-import pytest
 import numpy as np
+import pytest
 from scipy.stats import hypergeom
 
-from xlmhg import mhg
-
-# v_ex = np.uint8([1,0,1,1,0,1] + [0]*12 + [1,0])  # example from paper
-
-"""
-@pytest.mark.skip(reason='Takes unncessarily long')
-def test_mhg_algos(tol=1e-11):
-    # generate all vectors with N = 20 and K = 5
-    N = 20
-    K = 5
-    #X = 1
-    #L = N
-    C = np.int64(list(it.combinations(range(N),K)))
-    p = C.shape[0]
-    print (p, C.shape[1])
-
-    for i in range(p):
-        if (i % 100) == 0:
-            print (i, end='')
-            sys.stdout.flush()
-        v = np.zeros(N, dtype = np.uint8)
-        v[C[i,:]] = 1
-        stat2, n2, pval2 = xlmhg_test_python(v, use_alg2=True)
-        stat1, n1, pval1 = xlmhg_test_python(v, use_alg2=False)
-        #print pval1, pval2, abs(pval1 - pval2) / max(abs(pval1), abs(pval2)), is_equal(pval1, pval2)
-        #assert is_equal(pval1, pval2, tol = 1e-12)
-        assert is_equal(pval1, pval2, tol=tol), 'v: %s ||| %s ||| %s ||| %s ||| %s' %(repr(v), repr([pval1,stat1,n1]), repr([pval2,stat2,n2]), '%.1e' %(abs(pval1-pval2)), '%.1e' %(tol * max(abs(pval1), abs(pval2))))
-"""
+from xlmhglite import mhg
 
 
 def get_xlmhg_stat_slow(v, X, L, tol=1e-12):
@@ -52,9 +25,9 @@ def get_xlmhg_stat_slow(v, X, L, tol=1e-12):
     # check if values are valid
     N = v.size
     if not (1 <= X <= N):
-        raise ValueError('Invalid value X=%d; should be >= 1 and <= N.' %(X))
+        raise ValueError('Invalid value X=%d; should be >= 1 and <= N.' % (X))
     if not (1 <= L <= N):
-        raise ValueError('Invalid value L=%d; should be >= 1 and <= N.' %(L))
+        raise ValueError('Invalid value L=%d; should be >= 1 and <= N.' % (L))
 
     K = int(np.sum(v != 0))
     if K == 0:
@@ -68,7 +41,7 @@ def get_xlmhg_stat_slow(v, X, L, tol=1e-12):
         if v[i] != 0:
             k += 1
         if k >= X:
-            hgp = hypergeom.sf(k-1, N, K, i+1)
+            hgp = hypergeom.sf(k - 1, N, K, i + 1)
             if hgp < stat and not mhg.is_equal(hgp, stat, tol):
                 stat = hgp
                 n_star = i + 1
@@ -88,35 +61,37 @@ def test_mhg_stat():
     K = 5
     X = 1
     L = N
-    C = np.int64(list(it.combinations(range(N),K)))
+    C = np.int64(list(it.combinations(range(N), K)))
     p = C.shape[0]
     np.random.seed(seed)
     for i in range(num_lists):
         idx = np.random.randint(p)
-        v = np.zeros(N, dtype = np.uint8)
-        v[C[idx,:]] = 1
-        stat, n_star = mhg.get_xlmhg_stat(v, X, L)
+        v = np.zeros(N, dtype=np.uint8)
+        v[C[idx, :]] = 1
+        indices = C[idx, :]
+        stat, n_star = mhg.get_xlmhg_stat(indices, N, K, X, L)
         stat_ref, n_star_ref = get_xlmhg_stat_slow(v, X, L)
         assert mhg.is_equal(stat, stat_ref, tol=tol) and \
-                n_star == n_star_ref, repr(v)
+               n_star == n_star_ref, repr(v)
 
 
 def test_xlmhg_stat():
     # test if XL-mHG test statistic is correct
     # uses a particular example vector,
     # and goes over all combinations of X and L
-    v = np.uint8([1,0,1,1,0,1] + [0]*12 + [1,0]) # example from paper
+    v = np.uint8([1, 0, 1, 1, 0, 1] + [0] * 12 + [1, 0])  # example from paper
+    indices = np.uint16(np.nonzero(v)[0])
     N = v.size
-    K = int(np.sum(v != 0))
+    K = indices.size
     tol = 1e-11
 
     assert N == 20 and K == 5
-    for L in range(1, N+1):
-        for X in range(1, N+1):
-            stat, n_star = mhg.get_xlmhg_stat(v, X, L)
+    for L in range(1, N + 1):
+        for X in range(1, N + 1):
+            stat, n_star = mhg.get_xlmhg_stat(indices, N, K, X, L)
             stat_ref, n_star_ref = get_xlmhg_stat_slow(v, X, L)
             assert mhg.is_equal(stat, stat_ref, tol=tol) and \
-                    n_star == n_star_ref, repr(v)
+                   n_star == n_star_ref, repr(v)
 
 
 def test_alg1_alg2_accuracy_difference():
@@ -139,7 +114,9 @@ def test_alg1_alg2_accuracy_difference():
         truth[i] = hypergeom.pmf(k, N, K, n)
 
         v = np.r_[np.ones(a, dtype=np.uint8), np.zeros(b, dtype=np.uint8)]
-        stat, n_star = mhg.get_xlmhg_stat(v, X, L)
+        indices = np.uint16(np.nonzero(v)[0])
+
+        stat, n_star = mhg.get_xlmhg_stat(indices, N, K, X, L)
         p1 = mhg.get_xlmhg_pval1(N, K, X, L, stat)
         p2 = mhg.get_xlmhg_pval2(N, K, X, L, stat)
         pval1[i] = p1
@@ -163,14 +140,15 @@ def test_mhg_pval_cross():
     K = 5
     X = 1
     L = N
-    C = np.int64(list(it.combinations(range(N),K)))
+    C = np.int64(list(it.combinations(range(N), K)))
     p = C.shape[0]
     np.random.seed(seed)
     for i in range(num_lists):
         idx = np.random.randint(p)
-        v = np.zeros(N, dtype = np.uint8)
-        v[C[idx,:]] = 1
-        stat, n_star = mhg.get_xlmhg_stat(v, X, L)
+        v = np.zeros(N, dtype=np.uint8)
+        v[C[idx, :]] = 1
+        indices = np.uint16(np.nonzero(v)[0])
+        stat, n_star = mhg.get_xlmhg_stat(indices, N, K, X, L)
         pval1 = mhg.get_xlmhg_pval1(N, K, X, L, stat)
         pval2 = mhg.get_xlmhg_pval2(N, K, X, L, stat)
         assert mhg.is_equal(pval1, pval2, tol=tol), repr(v)
@@ -181,14 +159,15 @@ def test_xlmhg_pval_cross():
     #   by comparing output of Algorithms 1 and 2 to each other
     # - goes over a particular example vector, for all combinations
     #   of X and L
-    v = np.uint8([1,0,1,1,0,1] + [0]*12 + [1,0]) # example from paper
+    v = np.uint8([1, 0, 1, 1, 0, 1] + [0] * 12 + [1, 0])  # example from paper
     N = v.size
     K = int(np.sum(v != 0))
+    indices = np.uint16(np.nonzero(v)[0])
     tol = 1e-11
     assert N == 20 and K == 5
-    for L in range(1, N+1):
-        for X in range(1, N+1):
-            stat, n_star = mhg.get_xlmhg_stat(v, X, L)
+    for L in range(1, N + 1):
+        for X in range(1, N + 1):
+            stat, n_star = mhg.get_xlmhg_stat(indices, N, K, X, L)
             pval1 = mhg.get_xlmhg_pval1(N, K, X, L, stat)
             pval2 = mhg.get_xlmhg_pval2(N, K, X, L, stat)
             assert mhg.is_equal(pval1, pval2, tol=tol), repr(v)
@@ -197,16 +176,19 @@ def test_xlmhg_pval_cross():
 def test_invalid():
     v = np.uint8([1, 0, 1, 1, 0, 1] + [0] * 12 + [1, 0])  # example from paper
     N = v.size
-    K = int(np.sum(v != 0))
+    int(np.sum(v != 0))
     X = 1
     L = N
+    K = int(np.sum(v != 0))
+    indices = np.uint16(np.nonzero(v)[0])
+
     tol = 1e-11
     with pytest.raises(ValueError):
         other = np.uint8([])
-        stat, cutoff = mhg.get_xlmhg_stat(other, X, L, tol)
+        stat, cutoff = mhg.get_xlmhg_stat(other, 0, 0, X, L, tol)
     with pytest.raises(ValueError):
-        stat, cutoff = mhg.get_xlmhg_stat(v, -1, L, tol)
+        stat, cutoff = mhg.get_xlmhg_stat(indices, N, K, -1, L, tol)
     with pytest.raises(ValueError):
-        stat, cutoff = mhg.get_xlmhg_stat(v, X, -1, tol)
+        stat, cutoff = mhg.get_xlmhg_stat(indices, N, K, X, -1, tol)
     with pytest.raises(ValueError):
-        stat, cutoff = mhg.get_xlmhg_stat(v, X, L, -1.0)
+        stat, cutoff = mhg.get_xlmhg_stat(indices, N, K, X, L, -1.0)

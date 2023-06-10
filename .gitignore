@@ -1,6 +1,6 @@
 # project-specific files
-/xlmhg/mhg_cython.c
-/xlmhg/mhg_cython.html
+/xlmhglite/mhg_cython.c
+/xlmhglite/mhg_cython.html
 /.idea/
 /wheelhouse/
 /.vscode/

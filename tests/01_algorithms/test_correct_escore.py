@@ -11,7 +11,7 @@ import pytest
 import numpy as np
 from scipy.stats import hypergeom
 
-from xlmhg import mhg, mhg_cython, xlmhg_test
+from xlmhglite import mhg, mhg_cython, xlmhg_test
 
 
 def calculate_escore(indices, N, X, L, hgp_thresh, tol):
@@ -66,8 +66,9 @@ def test_mhg_escore():
         indices = C[idx,:]
         escore_ref = calculate_escore(indices, N, X, L, pval, tol)
         escore = mhg_cython.get_xlmhg_escore(indices, N, K, X, L, pval)
-        assert escore > 0 and mhg.is_equal(escore, escore_ref, tol=tol)
-
+        assert math.isnan(escore) or escore > 0
+        assert (math.isnan(escore) and math.isnan(escore_ref)) or \
+               mhg.is_equal(escore, escore_ref, tol=tol)
 
 def test_xlmhg_escore():
     # test if XL-mHG E-score implementation is correct

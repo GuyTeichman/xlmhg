@@ -2,12 +2,12 @@
 #
 # This file is part of XL-mHG.
 
-"""Fixtures for the `xlmhg` API tests."""
+"""Fixtures for the `xlmhglite` API tests."""
 
 import numpy as np
 import pytest
 
-# from xlmhg import mHGResult, xlmhg_test, get_xlmhg_test_result
+# from xlmhglite import mHGResult, xlmhg_test, get_xlmhg_test_result
 
 @pytest.fixture
 def my_v():

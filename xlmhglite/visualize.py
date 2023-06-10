@@ -10,9 +10,9 @@ from math import floor, ceil
 import numpy as np
 import plotly.graph_objs as go
 
-import xlmhg
-from xlmhg import mHGResult
-from xlmhg.mhg import get_hgp, is_equal
+import xlmhglite
+from xlmhglite import mHGResult
+from xlmhglite.mhg import get_hgp, is_equal
 
 
 def get_hypergeometric_stats(N, indices):

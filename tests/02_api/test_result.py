@@ -9,7 +9,7 @@ from copy import deepcopy
 import pytest
 import numpy as np
 
-from xlmhg import get_xlmhg_test_result, mHGResult
+from xlmhglite import get_xlmhg_test_result, mHGResult
 
 
 @pytest.fixture

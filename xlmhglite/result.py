@@ -15,7 +15,7 @@ try:
     # the C extension fails.
     from . import mhg_cython
 except ImportError:
-    print('Warning (xlmhg): Failed to import "mhg_cython" C extension.',
+    print('Warning (xlmhglite): Failed to import "mhg_cython" C extension.',
           file=sys.stderr)
     from . import mhg as mhg_cython
 

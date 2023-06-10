@@ -1,30 +1,49 @@
-# Copyright (c) 2015-2019 Florian Wagner
-#
-# This file is part of XL-mHG.
-
-import sys
+import io
 import os
 from os import path
-import io
 from sys import platform
 
 from setuptools import setup, find_packages, Extension
 from wheel.bdist_wheel import bdist_wheel
 
+
+def get_extra_requires(path, add_all=True):
+    import re
+    from collections import defaultdict
+
+    with open(path) as fp:
+        extra_deps = defaultdict(set)
+        for k in fp:
+            if k.strip() and not k.startswith('#'):
+                tags = set()
+                if ':' in k:
+                    k, v = k.split(':')
+                    tags.update(vv.strip() for vv in v.split(','))
+                tags.add(re.split('[<=>]', k)[0])
+                for t in tags:
+                    extra_deps[t].add(k)
+
+        # add tag `all` at the end
+        if add_all:
+            extra_deps['all'] = set(vv for v in extra_deps.values() for vv in v)
+
+    return extra_deps
+
+
 here = path.abspath(path.dirname(__file__))
-root = 'xlmhg'
-description = 'XL-mHG: A Semiparametric Test for Enrichment'
+root = 'xlmhglite'
+description = 'XL-mHG lite: A light implementation of the Semiparametric Enrichment Test'
 version = '2.5.4'
 
-long_description = ''
 with io.open(path.join(here, 'README.rst'), encoding='UTF-8') as fh:
     long_description = fh.read()
 
 ext_modules = []
 cmdclass = {}
 
+extras_require = get_extra_requires('requirements_extra.txt')
+
 install_requires = [
-    'plotly>=3',
     'pip>=19',
 ]
 
@@ -38,9 +57,6 @@ if 'READTHEDOCS' not in os.environ or \
     ])
 else:
     pass
-    #install_requires.extend([
-    #])
-
 
 try:
     # this can fail if numpy or cython isn't installed yet
@@ -66,7 +82,7 @@ else:
 
             # only way of setting linetrace without cythonize?
             macros.append(('CYTHON_TRACE', '1'))
-            #CythonOptions.directive_defaults['linetrace'] = True
+            # CythonOptions.directive_defaults['linetrace'] = True
             cython_defaults = CythonOptions.get_directive_defaults()
             cython_defaults['linetrace'] = True
             print('Warning: Enabling line tracing in cython extension.'
@@ -75,14 +91,13 @@ else:
         # KeyError if environment variable is not set,
         # ImportError if cython is not yet installed
         pass
-
+    macros.append(('NPY_NO_DEPRECATED_API', 'NPY_1_7_API_VERSION'))
     ext_modules.append(
         Extension(root + '.' + 'mhg_cython', [root + '/mhg_cython.pyx'],
                   include_dirs=[np.get_include()],
                   define_macros=macros))
 
     cmdclass['build_ext'] = build_ext
-
 
 # do not require installation of extensions if built by ReadTheDocs
 # (we mock these modules in docs/source/conf.py)
@@ -106,83 +121,41 @@ class CustomBdistWheel(bdist_wheel):
 
 
 cmdclass['bdist_wheel'] = CustomBdistWheel
-
 # extensions
 setup(
-    name='xlmhg',
-
+    name='xlmhglite',
     version=version,
-
     description=description,
     long_description=long_description,
-
-    url='https://github.com/flo-compbio/xlmhg',
-
-    author='Florian Wagner',
-    author_email='florian.wagner@duke.edu',
-
+    url='https://github.com/flo-compbio/xlmhglite',
+    author='Guy Teichman',
+    author_email='guyteichman@gmail.com',
     license='GPLv3',
-
     # see https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         'Development Status :: 4 - Beta',
-
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
         'Topic :: Scientific/Engineering :: Bio-Informatics',
-
         'License :: OSI Approved :: BSD License',
-
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
         'Programming Language :: Cython',
     ],
-
-    keywords=('statistics nonparametric semiparametric enrichment test '
-              'ranked lists'),
-
-    # packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
+    keywords=['statistics', 'nonparametric', 'semiparametric', 'enrichment test', 'ranked lists'],
     packages=find_packages(exclude=['docs', 'tests*']),
-
     # extensions
     ext_modules=ext_modules,
     cmdclass=cmdclass,
-
-    # libraries = [],
-
     install_requires=install_requires,
-
-    # tests_require=[],
-
-    # development dependencies
-    extras_require={
-         'docs': [
-             'sphinx>=1.4.5, <2',
-             'sphinx-rtd-theme>=0.1.9',
-             'sphinxcontrib-napoleon>=0.5.3',
-             #'mock>=2.0.0, <3',
-         ],
-        'tests': [
-            'pytest>=2.8.5, <6',
-            'pytest-cov>=2.2.1, <3',
-            'scipy>=1.1, <2',
-        ],
-    },
-
+    extras_require=extras_require,
+    tests_require=['pytest'],
     # data
     package_data={
-        'xlmhg': ['xlmhg/mhg_cython.pyx',
+        'xlmhglite': ['xlmhglite/mhg_cython.pyx',
                   'tests/*',
                   'README.rst', 'LICENSE', 'CHANGELOG.rst'],
-    },
-
-    # data outside package
-    # data_files=[],
-
-    # executable scripts
-    entry_points={
-        # 'console_scripts': []
-    },
+    }
 )

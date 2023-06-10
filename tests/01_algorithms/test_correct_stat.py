@@ -11,10 +11,10 @@ import pytest
 import numpy as np
 from scipy.stats import hypergeom
 
-from xlmhg import xlmhg_test
-from xlmhg import mhg_cython
-from xlmhg.mhg import is_equal
-# from xlmhg.mhg_cython import get_xlmhg_stat
+from xlmhglite import xlmhg_test
+from xlmhglite import mhg_cython
+from xlmhglite.mhg import is_equal
+# from xlmhglite.mhg_cython import get_xlmhg_stat
 
 def get_xlmhg_stat_slow(v, X=None, L=None, tol=1e-12):
     # calculate the XL-mHG test statistic (inefficient)

@@ -16,7 +16,7 @@ try:
     # the C extension fails.
     from . import mhg_cython
 except ImportError:
-    print('Warning (xlmhg): Failed to import the "mhg_cython" C extension.'
+    print('Warning (xlmhglite): Failed to import the "mhg_cython" C extension.'
           'Falling back to the pure Python implementation, which is very '
           'slow.', file=sys.stderr)
     from . import mhg as mhg_cython
@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 
 def get_xlmhg_O1_bound(stat, K, X, L):
     """Calculate the O(1)-bound for the XL-mHG p-value."""
-    assert isinstance(stat, (float, np.float))
+    assert isinstance(stat, (float))
     assert isinstance(K, (int, np.integer))
     assert isinstance(X, (int, np.integer))
     assert isinstance(L, (int, np.integer))
@@ -118,14 +118,14 @@ def get_xlmhg_test_result(N, indices, X=None, L=None,
         assert isinstance(L, (int, np.integer))
     assert isinstance(exact_pval, str)
     if pval_thresh is not None:
-        assert isinstance(pval_thresh, (float, np.float))
+        assert isinstance(pval_thresh, float)
     if escore_pval_thresh is not None:
-        assert isinstance(escore_pval_thresh, (float, np.float))
+        assert isinstance(escore_pval_thresh, float)
     if table is not None:
         assert isinstance(table, np.ndarray) and table.ndim == 2 and \
             np.issubdtype(table.dtype, np.longdouble)
     assert isinstance(use_alg1, (bool, np.bool_))
-    assert isinstance(tol, (float, np.float))
+    assert isinstance(tol, float)
 
     # assign default values, if None
     K = indices.size
@@ -204,7 +204,9 @@ def get_xlmhg_test_result(N, indices, X=None, L=None,
                          % (table.shape[0], table.shape[1], K+1, W+1))
 
     ### Step 1: Calculate XL-mHG test statistic.
-    stat, cutoff = mhg_cython.get_xlmhg_stat(indices, N, K, X, L, tol)
+    from xlmhglite import mhg
+
+    stat, cutoff = mhg.get_xlmhg_stat(indices, N, K, X, L, tol)
     assert 0.0 <= stat <= 1.0
 
     # check for special cases
