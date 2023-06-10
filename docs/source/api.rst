@@ -3,13 +3,13 @@
 
     This file is part of XL-mHG.
 
-.. currentmodule:: xlmhg
+.. currentmodule:: xlmhglite
 
 
 API Reference
 =============
 
-The `xlmhg <https://pypi.python.org/pypi/xlmhg>`_ Python API includes two
+The `xlmhglite <https://pypi.python.org/pypi/xlmhglite>`_ Python API includes two
 alternative functions to **conduct an XL-mHG test**:
 
 - The :ref:`simple test function <simple_test>`, :func:`xlmhg_test`,
@@ -46,18 +46,18 @@ Simple test function - :func:`xlmhg_test`
 Advanced test function - :func:`get_xlmhg_test_result`
 ------------------------------------------------------
 
-.. autofunction:: xlmhg.get_xlmhg_test_result
+.. autofunction:: xlmhglite.get_xlmhg_test_result
 
 Test result objects - :class:`mHGResult`
 ----------------------------------------
 
-.. autoclass:: xlmhg.mHGResult
+.. autoclass:: xlmhglite.mHGResult
     :members:
 
 Visualizing test results - :func:`get_result_figure`
 ----------------------------------------------------
 
-.. autofunction:: xlmhg.get_result_figure
+.. autofunction:: xlmhglite.get_result_figure
 
 .. _plotly: https://plot.ly/
 

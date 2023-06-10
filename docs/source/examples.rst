@@ -23,12 +23,12 @@ Script:
 .. code-block:: python
 
     import numpy as np
-    import xlmhg
+    import xlmhglite
 
     v = np.uint8([1,0,1,1,0,1] + [0]*12 + [1,0])
     X = 3
     L = 10
-    stat, cutoff, pval = xlmhg.xlmhg_test(v, X=X, L=L)
+    stat, cutoff, pval = xlmhglite.xlmhg_test(v, X=X, L=L)
 
     print('Test statistic: %.3f' % stat)
     print('Cutoff: %d' % cutoff)
@@ -52,7 +52,7 @@ Script:
 .. code-block:: python
 
     import numpy as np
-    import xlmhg
+    import xlmhglite
 
     v = np.uint8([1,0,1,1,0,1] + [0]*12 + [1,0])
     X = 3
@@ -61,7 +61,7 @@ Script:
     N = v.size
     indices = np.uint16(np.nonzero(v)[0])
 
-    result = xlmhg.get_xlmhg_test_result(N, indices, X=X, L=L)
+    result = xlmhglite.get_xlmhg_test_result(N, indices, X=X, L=L)
 
     print('Result:', str(result))
     print('Test statistic: %.3f' % result.stat)
@@ -89,7 +89,7 @@ Script:
 .. code-block:: python
 
     import numpy as np
-    import xlmhg
+    import xlmhglite
     from plotly.offline import plot
 
     v = np.uint8([1,0,1,1,0,1] + [0]*12 + [1,0])
@@ -99,9 +99,9 @@ Script:
     N = v.size
     indices = np.uint16(np.nonzero(v)[0])
 
-    result = xlmhg.get_xlmhg_test_result(N, indices, X=X, L=L)
+    result = xlmhglite.get_xlmhg_test_result(N, indices, X=X, L=L)
 
-    fig = xlmhg.get_result_figure(result)
+    fig = xlmhglite.get_result_figure(result)
 
     plot(fig, filename='test_figure.html')
 

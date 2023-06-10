@@ -6,8 +6,8 @@
 Installation
 ============
 
-Installing the xlmhg package should be straightforward on Linux,
-Windows, and Mac OS X. It only requires `Python 2.7.x or 3.5.x`__ to be
+Installing the xlmhglite package should be straightforward on Linux,
+Windows, and Mac OS X. It only requires `Python >= 3.8`__ to be
 installed. If you have a different version of Python, you have to `install
 the package from source`__.
 
@@ -35,23 +35,23 @@ __ pip_
 Installing the latest version
 -----------------------------
 
-To install the latest version of the `xlmhg`__ Python package, run::
+To install the latest version of the `xlmhglite`__ Python package, run::
 
-    pip install xlmhg
+    pip install xlmhglite
 
-__ xlmhg_
+__ xlmhglite_
 
 
 Installing a specific version
 -----------------------------
 
-To install a specific version of the `xlmhg`__ Python package, e.g., "2.3.1",
+To install a specific version of the `xlmhglite`__ Python package, e.g., "2.3.1",
 run::
 
-    pip install xlmhg==2.3.1
+    pip install xlmhglite==2.3.1
 
 
-__ xlmhg_
+__ xlmhglite_
 
 Specifying a version range
 --------------------------
@@ -61,7 +61,7 @@ XL-mHG follows `semantic versioning`__, so changes in the major release number
 install the latest version of a specific major release number (e.g., "2.x.x"),
 run::
 
-    pip install "xlmhg>=2,<3"
+    pip install "xlmhglite>=2,<3"
 
 __ semvar_
 
@@ -71,7 +71,7 @@ Installation from source
 ------------------------
 
 This installation method is only required for Python versions other than 2.7
-or 3.5. The installation command is the same (``pip install xlmhg``), but
+or 3.5. The installation command is the same (``pip install xlmhglite``), but
 the installation involves the compilation of C source code using a C compiler.
 The procedure for installing an appropriate compiler is different for different
 operating systems.
@@ -103,7 +103,7 @@ __ vs2010-64_
 
 .. _pip: https://pip.pypa.io/en/stable/
 
-.. _xlmhg: https://pypi.python.org/pypi/xlmhg
+.. _xlmhglite: https://pypi.python.org/pypi/xlmhglite
 
 .. _semvar: http://semver.org/
 
