@@ -54,14 +54,6 @@ Test result objects - :class:`mHGResult`
 .. autoclass:: xlmhglite.mHGResult
     :members:
 
-Visualizing test results - :func:`get_result_figure`
-----------------------------------------------------
-
-.. autofunction:: xlmhglite.get_result_figure
-
-.. _plotly: https://plot.ly/
-
-
 .. "Indices and tables
     ==================
 
