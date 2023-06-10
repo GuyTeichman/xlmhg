@@ -10,9 +10,11 @@ Contents
 .. toctree::
   :maxdepth: 2
 
+  readme
   background
   install
   examples
   api
   citing
+  history
   license
