@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Reference &mdash; XL-mHG 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How to cite the XL-mHG test" href="citing.html" />
+    <link rel="prev" title="Examples" href="examples.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            XL-mHG
+          </a>
+              <div class="version">
+                0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="background.html">Statistical Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#simple-test-function-xlmhg-test">Simple test function - <code class="xref py py-func docutils literal notranslate"><span class="pre">xlmhg_test()</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#xlmhglite.xlmhg_test"><code class="docutils literal notranslate"><span class="pre">xlmhg_test()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#advanced-test-function-get-xlmhg-test-result">Advanced test function - <code class="xref py py-func docutils literal notranslate"><span class="pre">get_xlmhg_test_result()</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#xlmhglite.get_xlmhg_test_result"><code class="docutils literal notranslate"><span class="pre">get_xlmhg_test_result()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#test-result-objects-mhgresult">Test result objects - <code class="xref py py-class docutils literal notranslate"><span class="pre">mHGResult</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#xlmhglite.mHGResult"><code class="docutils literal notranslate"><span class="pre">mHGResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#xlmhglite.mHGResult.N"><code class="docutils literal notranslate"><span class="pre">mHGResult.N</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xlmhglite.mHGResult.indices"><code class="docutils literal notranslate"><span class="pre">mHGResult.indices</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xlmhglite.mHGResult.X"><code class="docutils literal notranslate"><span class="pre">mHGResult.X</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xlmhglite.mHGResult.L"><code class="docutils literal notranslate"><span class="pre">mHGResult.L</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xlmhglite.mHGResult.stat"><code class="docutils literal notranslate"><span class="pre">mHGResult.stat</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xlmhglite.mHGResult.cutoff"><code class="docutils literal notranslate"><span class="pre">mHGResult.cutoff</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xlmhglite.mHGResult.pval"><code class="docutils literal notranslate"><span class="pre">mHGResult.pval</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xlmhglite.mHGResult.pval_thresh"><code class="docutils literal notranslate"><span class="pre">mHGResult.pval_thresh</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xlmhglite.mHGResult.escore_pval_thresh"><code class="docutils literal notranslate"><span class="pre">mHGResult.escore_pval_thresh</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xlmhglite.mHGResult.escore_tol"><code class="docutils literal notranslate"><span class="pre">mHGResult.escore_tol</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xlmhglite.mHGResult.K"><code class="docutils literal notranslate"><span class="pre">mHGResult.K</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xlmhglite.mHGResult.escore"><code class="docutils literal notranslate"><span class="pre">mHGResult.escore</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xlmhglite.mHGResult.fold_enrichment"><code class="docutils literal notranslate"><span class="pre">mHGResult.fold_enrichment</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xlmhglite.mHGResult.hash"><code class="docutils literal notranslate"><span class="pre">mHGResult.hash</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xlmhglite.mHGResult.k"><code class="docutils literal notranslate"><span class="pre">mHGResult.k</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xlmhglite.mHGResult.v"><code class="docutils literal notranslate"><span class="pre">mHGResult.v</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">How to cite the XL-mHG test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">XL-mHG</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading">¶</a></h1>
+<p>The <a class="reference external" href="https://pypi.python.org/pypi/xlmhglite">xlmhglite</a> Python API includes two
+alternative functions to <strong>conduct an XL-mHG test</strong>:</p>
+<ul class="simple">
+<li><p>The <a class="reference internal" href="#simple-test"><span class="std std-ref">simple test function</span></a>, <a class="reference internal" href="#xlmhglite.xlmhg_test" title="xlmhglite.xlmhg_test"><code class="xref py py-func docutils literal notranslate"><span class="pre">xlmhg_test()</span></code></a>,
+accepts a ranked list in the form of a vector, and (optionally) the <code class="docutils literal notranslate"><span class="pre">X</span></code>
+and <code class="docutils literal notranslate"><span class="pre">L</span></code> parameters, and returns a 3-tuple containing the test statistic,
+cutoff, and p-value.</p></li>
+<li><p>The <a class="reference internal" href="#advanced-test"><span class="std std-ref">advanced test function</span></a>,
+<a class="reference internal" href="#xlmhglite.get_xlmhg_test_result" title="xlmhglite.get_xlmhg_test_result"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_xlmhg_test_result()</span></code></a>, accepts a more compact representation
+of a list (consisting of its length <code class="docutils literal notranslate"><span class="pre">N</span></code> and a vector specifying the
+<code class="docutils literal notranslate"><span class="pre">indices</span></code> of the 1’s in the ranked list), as well as several additional
+arguments that can improve the  performance of the test. Instead of a
+simple tuple, this API returns the test result as an <a class="reference internal" href="#xlmhglite.mHGResult" title="xlmhglite.mHGResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">mHGResult</span></code></a>
+object, which includes additional information such as the test parameters,
+and methods to calculate additional quantities like E-Scores.</p></li>
+</ul>
+<p>Additionally, the API includes a function,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">get_result_figure()</span></code>, for <strong>visualizing a test result</strong> in a
+<a href="#id2"><span class="problematic" id="id3">`Plotly`__</span></a> figure. See <a class="reference internal" href="examples.html"><span class="doc">Examples</span></a> for concrete examples of
+how to use these functions.</p>
+<section id="simple-test-function-xlmhg-test">
+<span id="simple-test"></span><h2>Simple test function - <a class="reference internal" href="#xlmhglite.xlmhg_test" title="xlmhglite.xlmhg_test"><code class="xref py py-func docutils literal notranslate"><span class="pre">xlmhg_test()</span></code></a><a class="headerlink" href="#simple-test-function-xlmhg-test" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="xlmhglite.xlmhg_test">
+<span class="sig-prename descclassname"><span class="pre">xlmhglite.</span></span><span class="sig-name descname"><span class="pre">xlmhg_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#xlmhglite.xlmhg_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform an XL-mHG test (simplified interface).</p>
+<p>This function accepts a vector containing zeros and ones, and returns
+a 3-tuple with the XL-mHG test statistic, cutoff, and p-value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (1-dim <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.24)"><code class="xref any docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> of integers) – The ranked list. All non-zero elements are considered “1”s.
+(Let N denote the length of the list.)</p></li>
+<li><p><strong>X</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – The <code class="docutils literal notranslate"><span class="pre">X</span></code> parameter. [1]</p></li>
+<li><p><strong>L</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – The <code class="docutils literal notranslate"><span class="pre">L</span></code> parameter. [N]</p></li>
+<li><p><strong>table</strong> (np.ndarray with <code class="docutils literal notranslate"><span class="pre">ndim=2</span></code> and <code class="docutils literal notranslate"><span class="pre">dtype=numpy.longdouble</span></code>, optional) – The dynamic programming table. Size has to be at least (K+1) x (W+1),
+with W = N-K. Providing this array avoids memory reallocation when
+conducting multiple tests. [None]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>stat</strong> (<em>float</em>) – The XL-mHG test statistic.</p></li>
+<li><p><strong>cutoff</strong> (<em>int</em>) – The (first) cutoff at which stat was attained.
+(0 if no cutoff was tested.)</p></li>
+<li><p><strong>pval</strong> (<em>float</em>) – The XL-mHG p-value (either exact or an upper bound).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="advanced-test-function-get-xlmhg-test-result">
+<span id="advanced-test"></span><h2>Advanced test function - <a class="reference internal" href="#xlmhglite.get_xlmhg_test_result" title="xlmhglite.get_xlmhg_test_result"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_xlmhg_test_result()</span></code></a><a class="headerlink" href="#advanced-test-function-get-xlmhg-test-result" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="xlmhglite.get_xlmhg_test_result">
+<span class="sig-prename descclassname"><span class="pre">xlmhglite.</span></span><span class="sig-name descname"><span class="pre">get_xlmhg_test_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exact_pval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'always'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pval_thresh</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">escore_pval_thresh</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_alg1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-12</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#xlmhglite.get_xlmhg_test_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform an XL-mHG test.</p>
+<p>This function accepts a list in the form of a numpy <code class="docutils literal notranslate"><span class="pre">indices</span></code> array
+containing the indices of the non-zero elements (sorted), along with the
+length <code class="docutils literal notranslate"><span class="pre">N</span></code> of the list. It returns an <a class="reference internal" href="#xlmhglite.mHGResult" title="xlmhglite.mHGResult"><code class="xref any py py-class docutils literal notranslate"><span class="pre">mHGResult</span></code></a> object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>int</strong> (<em>N</em><em>,</em>) – The length of the list.</p></li>
+<li><p><strong>indices</strong> (1-dim <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.24)"><code class="xref any docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> with <code class="docutils literal notranslate"><span class="pre">dtype</span></code> = numpy.uint16) – Sorted list of indices corresponding to the “1”s in the ranked list.</p></li>
+<li><p><strong>X</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – The <code class="docutils literal notranslate"><span class="pre">X</span></code> parameter. Should be between 0 and K (inclusive), where K
+is the length of <code class="docutils literal notranslate"><span class="pre">indices</span></code>. [0]</p></li>
+<li><p><strong>L</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – The <code class="docutils literal notranslate"><span class="pre">L</span></code> parameter. Should be between 0 and <code class="docutils literal notranslate"><span class="pre">N</span></code> (inclusive). If
+<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref any docutils literal notranslate"><span class="pre">None</span></code></a>, this parameter will be set to <code class="docutils literal notranslate"><span class="pre">N</span></code> [None]</p></li>
+<li><p><strong>exact_pval</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>enumerated</em>) – <p>Valid values are: ‘always’, ‘if_significant’, and ‘if_necessary’.
+Determines in which cases exact p-values should be calculated. This
+option helps users avoid the time-consuming calculation of an exact
+p-value in cases where they do not require it, which can lead to
+significant performance gains. [‘always’]</p>
+<p>Specifically, this setting (in conjunction with <code class="docutils literal notranslate"><span class="pre">pval_thresh</span></code>)
+determines in which cases the PVAL-THRESH algorithm is invoked to
+efficiently determine whether the test is significant. This algorithm
+first tries to make this determination by calculating O(1)- and O(N)-
+bounds of the XL-mHG p-value. Only if this fails to give a conclusive
+answer, an O(N^2)-algorithm is used to calculate the exact p-value.</p>
+<p>Note that whenever ‘if_necessary’ or ‘if_significant’ is
+specified, a significance level (p-value threshold; argument
+<code class="docutils literal notranslate"><span class="pre">pval_thresh</span></code>) must be specified as well.</p>
+</p></li>
+<li><p><strong>pval_thresh</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – The significance threshold, i.e., the p-value below which the test
+should be considered statistically significant. Note that this
+argument must be given whenever the <code class="docutils literal notranslate"><span class="pre">escore_pval_thresh</span></code> argument is
+given. [None]</p></li>
+<li><p><strong>escore_pval_thresh</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – The significance threshold to be used in the calculation of an E-score.
+The E-score is a measure of the strength of enrichment that is similar
+to “fold enrichment”. [None]</p></li>
+<li><p><strong>table</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.24)"><code class="xref any docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> with <code class="docutils literal notranslate"><span class="pre">ndim=2</span></code> and <code class="docutils literal notranslate"><span class="pre">dtype=numpy.longdouble</span></code>, optional) – The dynamic programming table. Size has to be at least (K+1) x (W+1).
+Providing this array avoids memory reallocation when conducting
+multiple tests. [None]</p></li>
+<li><p><strong>use_alg1</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether to use PVAL1 (instead of PVAL2) for calculating the
+p-value. [False]</p></li>
+<li><p><strong>tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – The tolerance used for comparing floats. [1e-12]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The test result.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#xlmhglite.mHGResult" title="xlmhglite.mHGResult"><code class="xref any py py-class docutils literal notranslate"><span class="pre">mHGResult</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="test-result-objects-mhgresult">
+<h2>Test result objects - <a class="reference internal" href="#xlmhglite.mHGResult" title="xlmhglite.mHGResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">mHGResult</span></code></a><a class="headerlink" href="#test-result-objects-mhgresult" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="xlmhglite.mHGResult">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">xlmhglite.</span></span><span class="sig-name descname"><span class="pre">mHGResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cutoff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pval</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pval_thresh</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">escore_pval_thresh</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">escore_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#xlmhglite.mHGResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>The result of an XL-mHG test.</p>
+<p>This class is used by the <a class="reference internal" href="#xlmhglite.get_xlmhg_test_result" title="xlmhglite.get_xlmhg_test_result"><code class="xref any py py-func docutils literal notranslate"><span class="pre">get_xlmhg_test_result</span></code></a> function to represent the
+result of an XL-mHG test.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – See <a class="reference internal" href="#xlmhglite.mHGResult.N" title="xlmhglite.mHGResult.N"><code class="xref py py-attr docutils literal notranslate"><span class="pre">N</span></code></a> attribute.</p></li>
+<li><p><strong>indices</strong> – See <a class="reference internal" href="#xlmhglite.mHGResult.indices" title="xlmhglite.mHGResult.indices"><code class="xref py py-attr docutils literal notranslate"><span class="pre">indices</span></code></a> attribute.</p></li>
+<li><p><strong>X</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – See <a class="reference internal" href="#xlmhglite.mHGResult.X" title="xlmhglite.mHGResult.X"><code class="xref py py-attr docutils literal notranslate"><span class="pre">X</span></code></a> attribute.</p></li>
+<li><p><strong>L</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – See :attr:’L’ attribute.</p></li>
+<li><p><strong>stat</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – See <a class="reference internal" href="#xlmhglite.mHGResult.stat" title="xlmhglite.mHGResult.stat"><code class="xref py py-attr docutils literal notranslate"><span class="pre">stat</span></code></a> attribute.</p></li>
+<li><p><strong>cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – See <a class="reference internal" href="#xlmhglite.mHGResult.cutoff" title="xlmhglite.mHGResult.cutoff"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cutoff</span></code></a> attribute.</p></li>
+<li><p><strong>pval</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – See <a class="reference internal" href="#xlmhglite.mHGResult.pval" title="xlmhglite.mHGResult.pval"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pval</span></code></a> attribute.</p></li>
+<li><p><strong>pval_thresh</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – See <a class="reference internal" href="#xlmhglite.mHGResult.pval_thresh" title="xlmhglite.mHGResult.pval_thresh"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pval_thresh</span></code></a> attribute.</p></li>
+<li><p><strong>escore_pval_thresh</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – See <a class="reference internal" href="#xlmhglite.mHGResult.escore_pval_thresh" title="xlmhglite.mHGResult.escore_pval_thresh"><code class="xref py py-attr docutils literal notranslate"><span class="pre">escore_pval_thresh</span></code></a> attribute.</p></li>
+<li><p><strong>escore_tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – See <a class="reference internal" href="#xlmhglite.mHGResult.escore_tol" title="xlmhglite.mHGResult.escore_tol"><code class="xref py py-attr docutils literal notranslate"><span class="pre">escore_tol</span></code></a> attribute.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="xlmhglite.mHGResult.N">
+<span class="sig-name descname"><span class="pre">N</span></span><a class="headerlink" href="#xlmhglite.mHGResult.N" title="Permalink to this definition">¶</a></dt>
+<dd><p>The length of the ranked list (i.e., the number of elements in it).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="xlmhglite.mHGResult.indices">
+<span class="sig-name descname"><span class="pre">indices</span></span><a class="headerlink" href="#xlmhglite.mHGResult.indices" title="Permalink to this definition">¶</a></dt>
+<dd><p>A sorted (!) list of indices of all the 1’s in the ranked list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.24)"><code class="xref any docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> with <code class="docutils literal notranslate"><span class="pre">ndim=1</span></code> and <code class="docutils literal notranslate"><span class="pre">dtype=np.uint16</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="xlmhglite.mHGResult.X">
+<span class="sig-name descname"><span class="pre">X</span></span><a class="headerlink" href="#xlmhglite.mHGResult.X" title="Permalink to this definition">¶</a></dt>
+<dd><p>The XL-mHG X parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="xlmhglite.mHGResult.L">
+<span class="sig-name descname"><span class="pre">L</span></span><a class="headerlink" href="#xlmhglite.mHGResult.L" title="Permalink to this definition">¶</a></dt>
+<dd><p>The XL-mHG L parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="xlmhglite.mHGResult.stat">
+<span class="sig-name descname"><span class="pre">stat</span></span><a class="headerlink" href="#xlmhglite.mHGResult.stat" title="Permalink to this definition">¶</a></dt>
+<dd><p>The XL-mHG test statistic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="xlmhglite.mHGResult.cutoff">
+<span class="sig-name descname"><span class="pre">cutoff</span></span><a class="headerlink" href="#xlmhglite.mHGResult.cutoff" title="Permalink to this definition">¶</a></dt>
+<dd><p>The XL-mHG cutoff.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="xlmhglite.mHGResult.pval">
+<span class="sig-name descname"><span class="pre">pval</span></span><a class="headerlink" href="#xlmhglite.mHGResult.pval" title="Permalink to this definition">¶</a></dt>
+<dd><p>The XL-mHG p-value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="xlmhglite.mHGResult.pval_thresh">
+<span class="sig-name descname"><span class="pre">pval_thresh</span></span><a class="headerlink" href="#xlmhglite.mHGResult.pval_thresh" title="Permalink to this definition">¶</a></dt>
+<dd><p>The user-specified significance (p-value) threshold for this test.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a> or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="xlmhglite.mHGResult.escore_pval_thresh">
+<span class="sig-name descname"><span class="pre">escore_pval_thresh</span></span><a class="headerlink" href="#xlmhglite.mHGResult.escore_pval_thresh" title="Permalink to this definition">¶</a></dt>
+<dd><p>The user-specified p-value threshold used in the E-score calculation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a> or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="xlmhglite.mHGResult.escore_tol">
+<span class="sig-name descname"><span class="pre">escore_tol</span></span><a class="headerlink" href="#xlmhglite.mHGResult.escore_tol" title="Permalink to this definition">¶</a></dt>
+<dd><p>The floating point tolerance used in the E-score calculation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a> or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="xlmhglite.mHGResult.K">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">K</span></span><a class="headerlink" href="#xlmhglite.mHGResult.K" title="Permalink to this definition">¶</a></dt>
+<dd><p>(property) Returns the number of 1’s in the list.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="xlmhglite.mHGResult.escore">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">escore</span></span><a class="headerlink" href="#xlmhglite.mHGResult.escore" title="Permalink to this definition">¶</a></dt>
+<dd><p>(property) Returns the E-score associated with the result.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="xlmhglite.mHGResult.fold_enrichment">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fold_enrichment</span></span><a class="headerlink" href="#xlmhglite.mHGResult.fold_enrichment" title="Permalink to this definition">¶</a></dt>
+<dd><p>(property) Returns the fold enrichment at the XL-mHG cutoff.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="xlmhglite.mHGResult.hash">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">hash</span></span><a class="headerlink" href="#xlmhglite.mHGResult.hash" title="Permalink to this definition">¶</a></dt>
+<dd><p>(property) Returns a unique hash value for the result.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="xlmhglite.mHGResult.k">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">k</span></span><a class="headerlink" href="#xlmhglite.mHGResult.k" title="Permalink to this definition">¶</a></dt>
+<dd><p>(property) Returns the number of 1’s above the XL-mHG cutoff.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="xlmhglite.mHGResult.v">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v</span></span><a class="headerlink" href="#xlmhglite.mHGResult.v" title="Permalink to this definition">¶</a></dt>
+<dd><p>(property) Returns the list as a <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.24)"><code class="xref any docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>
+(with dtype <code class="docutils literal notranslate"><span class="pre">np.uint8</span></code>).</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="examples.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="citing.html" class="btn btn-neutral float-right" title="How to cite the XL-mHG test" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Florian Wagner.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Statistical Background &mdash; XL-mHG 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="install.html" />
+    <link rel="prev" title="XL-mHG User Manual" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            XL-mHG
+          </a>
+              <div class="version">
+                0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Statistical Background</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-do-the-x-and-l-parameters-mean">What do the <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">L</span></code> parameters mean?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">How to cite the XL-mHG test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">XL-mHG</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Statistical Background</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/background.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="statistical-background">
+<h1>Statistical Background<a class="headerlink" href="#statistical-background" title="Permalink to this heading">¶</a></h1>
+<p>The XL-mHG test is a powerful semiparametric test to assess <em>enrichment</em> in
+ranked lists. It is based on the nonparametric <strong>mHG test</strong>, developed by
+<a class="reference external" href="http://bioinfo.cs.technion.ac.il/people/zohar">Dr. Zohar Yakhini</a> and colleagues (<a class="reference external" href="https://dx.doi.org/10.1371/journal.pcbi.0030039">Eden et al., 2007</a>), who also proposed
+a dynamic programming algorithm that enables the efficient calculation of
+exact p-values for this test.</p>
+<p>The input to the test is a ranked list of items, some of which are known
+to have some “interesting property”. The test asks whether there exists an
+unusual accumulation of a subset of those “interesting items” at the “top of
+the list”, without requiring the user to specify what part of the list should
+be considered “the top”. Computationally, the ranked list can be represented
+as a column vector containing only 0’s and 1’s, with 1’s representing the
+interesting items. For example, the following list of 20 items exhibits an
+accumulation of 1’s “at the top” that is considered statistically significant
+(p &lt; 0.05) by the mHG test:</p>
+<p>v = (1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0)<sup>T</sup></p>
+<p>To better understand how enrichment is defined for the purposes of the mHG
+test, it is helpful to take a close
+look at the definition of its test statistic: For a given ranked list of length
+<code class="docutils literal notranslate"><span class="pre">N</span></code>, it is defined as the <em>minimum hypergeometric p-value</em> over all N
+possible cutoffs. This means that users do not have to specify a fixed
+cutoff that defines “the top of the list”. This nonparametric approach makes
+the mHG test very flexible, meaning that it can detect enrichment when there
+are only a few “interesting” items that are extremely concentrated at the very
+top of the list (representing one extreme), as well as when there is a
+slight overabundance of interesting items within, say, the entire top half
+of the list.</p>
+<p>However, for some applications, the mHG test is a little “too flexible”,
+meaning that it would be beneficial to be able to somewhat restrict the type of
+enrichment that is being detected by the test. To this end, the <strong>XL-mHG test</strong>
+extends the mHG test, by introducing two parameters (<code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">L</span></code>) that
+essentially allow certain cutoffs to be ignored in the calculation of the
+test statistic. The <a class="reference external" href="https://github.com/flo-compbio/xlmhg">xlmhg</a> package implements a dynamic programming
+algorithm to efficiently calculate XL-mHG p-values. This algorithm is based on
+the algorithm proposed by <a class="reference external" href="https://dx.doi.org/10.1371/journal.pcbi.0030039">Eden et al.</a>, but has been modified to calculate
+exact p-values for the new test statistic, (<a class="reference external" href="https://arxiv.org/abs/1507.07905">Wagner, 2015</a>), and improved
+to provide better numerical accuracy and performance (<a class="reference external" href="https://doi.org/10.7287/peerj.preprints.1962v2">Wagner, 2016</a>).</p>
+<p>In biology, specifically in <em>GO enrichment analysis</em>, there are many situations
+in which the “best” cutoff is not known <em>a priori</em>. In those cases, the
+mHG and XL-mHG tests are excellent choices for detecting enrichment, and
+have been successfully applied for detecting GO enrichment in both supervised
+and unsupervised settings (<a class="reference external" href="https://dx.doi.org/10.1186/1471-2105-10-48">Eden, Navon, et al., 2007</a>; <a class="reference external" href="https://dx.doi.org/10.1371/journal.pone.0143196">Wagner, 2015</a>).</p>
+<section id="what-do-the-x-and-l-parameters-mean">
+<h2>What do the <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">L</span></code> parameters mean?<a class="headerlink" href="#what-do-the-x-and-l-parameters-mean" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">X</span></code> refers to the minimum number of “1’s” that have to be seen before
+anything can be called “enrichment”.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">L</span></code> is the lowest cutoff (i.e., the largest <code class="docutils literal notranslate"><span class="pre">n</span></code>) that is being tested
+for enrichment.</p></li>
+</ul>
+<p>A more direct way to understand <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">L</span></code> is through the definition of
+the XL-mHG test statistic. It is defined as the minimum hypergeometric p-value
+over all cutoffs at which at least <code class="docutils literal notranslate"><span class="pre">X</span></code> “1’s” have already been seen, and
+excluding any cutoffs larger than <code class="docutils literal notranslate"><span class="pre">L</span></code>. For <code class="docutils literal notranslate"><span class="pre">X=1</span></code> and <code class="docutils literal notranslate"><span class="pre">L=N</span></code>, the XL-mHG
+test reduces to the mHG test.</p>
+</section>
+<section id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this heading">¶</a></h2>
+<p>For detailed discussions of the XL-mHG test and the algorithms
+implemented in the <a class="reference external" href="https://github.com/flo-compbio/xlmhg">xlmhg</a> package to efficiently calculate XL-mHG test
+statistics and p-values, please see the
+<a class="reference external" href="https://arxiv.org/abs/1507.07905">Technical Report on arXiv (Wagner, 2015)</a>,
+as well as the <a class="reference external" href="https://doi.org/10.7287/peerj.preprints.1962v2">XL-mHG PeerJ Preprint article (Wagner, 2016)</a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="XL-mHG User Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="install.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Florian Wagner.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
