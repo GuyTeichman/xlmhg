@@ -5,9 +5,6 @@
 /wheelhouse/
 /.vscode/
 
-# sphinx docs
-/docs/build/
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
