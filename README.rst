@@ -1,17 +1,20 @@
-XL-mHG
-======
+XL-mHG Lite
+=============
 
-| |pypi| |versions| |license|
 
-===========  ====================================================================
-**master**   |codecov-master| |travis-master| |appveyor-master| |docs-latest|
-**develop**  |codecov-develop| |travis-develop| |appveyor-develop| |docs-develop|
-===========  ====================================================================
+**Useful links:** `Documentation <https://guyteichman.github.io/xlmhglite>`_ |
+`Source code <https://github.com/GuyTeichman/xlmhglite>`_ |
+`Bug reports <https://github.com/GuyTeichman/xlmhglite/issues>`_ | |pipimage| | |versionssupported| | |githubactions| | |downloads| | |license|
 
-This is an efficient Python/Cython implementation of the semiparametric
+`xlmhg` is an efficient Python/Cython implementation of the semiparametric
 `XL-mHG test`__ for enrichment in ranked lists. The XL-mHG test is an extension
 of the nonparametric `mHG test`__, which was developed by `Dr. Zohar
 Yakhini`__ and colleagues.
+
+`xlmhglite` is a fork of the original `xlmhg` package (which is unfortunately no longer being maintained).
+This fork was updated to support modern Python versions (Python >=3.8), fix bugs in the original implementation,
+and reduce the mandatory dependencies of the project to a minimum.
+To that end, the plotting functionality of `xlmhg` is not part of the core `xlmhglite` package, instead being an optional requirement.
 
 __ xlmhg_paper_
 __ mhg_paper_
@@ -20,21 +23,27 @@ __ zohar_
 Installation
 ------------
 
+To install the core ("lite") version of `xlmhglite`:
 .. code-block:: bash
 
-    $ pip install xlmhg
+    $ pip install xlmhglite
+
+To install the complete version of `xlmhglite` (including the plotting functionality):
+.. code-block:: bash
+
+    $ pip install xlmhglite['all']
 
 Getting started
 ---------------
 
-The `xlmhg` package provides two functions (one simple and more more advanced)
+The `xlmhglite` package provides two functions (one simple and more more advanced)
 for performing XL-mHG tests. These functions are documented in the
 `User Manual`__. Here's a quick example using the "simple" test function:
 
 .. code-block:: python
 
-    import xlmhg
-    stat, cutoff, pval = xlmhg.xlmhg_test(v, X, L)
+    import xlmhglite
+    stat, cutoff, pval = xlmhglite.xlmhg_test(v, X, L)
 
 Where: ``v`` is the ranked list of 0's and 1's, represented by a NumPy array of
 integers, ``X`` and ``L`` are the XL-mHG parameters, and the return values have
@@ -103,52 +112,23 @@ Copyright (c) 2015-2019 Florian Wagner
 
 .. _go_pca_paper: https://dx.doi.org/10.1371/journal.pone.0143196
 
-.. _user_manual: https://xl-mhg.readthedocs.io
+.. _user_manual: https://guyteichman.github.io/xlmhglite
 
-.. |pypi| image:: https://img.shields.io/pypi/v/xlmhg.svg
-    :target: https://pypi.python.org/pypi/xlmhg
-    :alt: PyPI version
-
-.. |versions| image:: https://img.shields.io/pypi/pyversions/xlmhg.svg
-    :target: https://pypi.python.org/pypi/xlmhg
-    :alt: Python versions supported
-
-.. |license| image:: https://img.shields.io/pypi/l/xlmhg.svg
+.. |license| image:: https://img.shields.io/pypi/l/xlmhglite.svg
     :target: https://pypi.python.org/pypi/xlmhg
     :alt: License
 
-.. |travis-master| image:: https://travis-ci.org/flo-compbio/xlmhg.svg?branch=master
-    :alt: Travis-CI build Status (master branch)
-    :scale: 100%
-    :target: https://travis-ci.org/flo-compbio/xlmhg.svg?branch=master
 
-.. |travis-develop| image:: https://travis-ci.org/flo-compbio/xlmhg.svg?branch=develop
-    :alt: Travis-CI build Status (develop branch)
-    :scale: 100%
-    :target: https://travis-ci.org/flo-compbio/xlmhg.svg?branch=develop
+.. |pipimage| image:: https://img.shields.io/pypi/v/xlmhglite.svg
+    :target: https://pypi.python.org/pypi/xlmhglite
+    :alt: PyPI version
+.. |downloads| image:: https://pepy.tech/badge/xlmhglite
+    :target: https://pepy.tech/project/xlmhglite
+    :alt: Downloads
+.. |versionssupported| image:: https://img.shields.io/pypi/pyversions/xlmhglite.svg
+    :target: https://pypi.python.org/pypi/xlmhglite
+    :alt: Python versions supported
 
-.. |appveyor-master| image:: https://ci.appveyor.com/api/projects/status/wpon7qkwpxx3fe6q/branch/master?svg=true
-    :alt: Appveyor build Status (master branch)
-    :scale: 100%
-    :target: https://ci.appveyor.com/project/flo-compbio/xlmhg/branch/master
-
-.. |appveyor-develop| image:: https://ci.appveyor.com/api/projects/status/wpon7qkwpxx3fe6q/branch/develop?svg=true
-    :alt: Appveyor build Status (develop branch)
-    :scale: 100%
-    :target: https://ci.appveyor.com/project/flo-compbio/xlmhg/branch/develop
-
-.. |codecov-master| image:: https://codecov.io/gh/flo-compbio/xlmhg/branch/master/graph/badge.svg
-    :alt: Coverage (master branch)
-    :target: https://codecov.io/gh/flo-compbio/xlmhg/branch/master
-
-.. |codecov-develop| image:: https://codecov.io/gh/flo-compbio/xlmhg/branch/develop/graph/badge.svg
-    :alt: Coverage (develop branch)
-    :target: https://codecov.io/gh/flo-compbio/xlmhg/branch/develop
-
-.. |docs-latest| image:: https://readthedocs.org/projects/xl-mhg/badge/?version=latest
-    :alt: Documentation Status (master branch)
-    :target: https://xl-mhg.readthedocs.io/en/latest
-
-.. |docs-develop| image:: https://readthedocs.org/projects/xl-mhg/badge/?version=develop
-    :alt: Documentation Status (develop branch)
-    :target: https://xl-mhg.readthedocs.io/en/develop
+..  |githubactions| image:: https://github.com/guyteichman/xlmhglite/actions/workflows/tests.yml/badge.svg
+    :target: https://github.com/GuyTeichman/xlmhglite/actions/workflows/tests.yml
+    :alt: Build status
