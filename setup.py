@@ -35,28 +35,21 @@ root = 'xlmhglite'
 description = 'XL-mHG lite: A light implementation of the Semiparametric Enrichment Test'
 version = '0.0.1'
 
-with io.open(path.join(here, 'README.rst'), encoding='UTF-8') as fh:
-    long_description = fh.read()
+with open('README.rst', encoding='utf8') as readme_file:
+    readme = readme_file.read()
+
+with open('HISTORY.rst') as history_file:
+    history = history_file.read()
+
+long_description=readme + '\n\n' + history
+
+with open('requirements.txt') as requirements_file:
+    requirements = requirements_file.read().split('\n')
 
 ext_modules = []
 cmdclass = {}
 
 extras_require = get_extra_requires('requirements_extra.txt')
-
-install_requires = [
-    'pip>=19',
-]
-
-# do not require installation if built by ReadTheDocs
-# (we mock these modules in docs/source/conf.py)
-if 'READTHEDOCS' not in os.environ or \
-        os.environ['READTHEDOCS'] != 'True':
-    install_requires.extend([
-        'cython>=0.25, <1',
-        'numpy>=1.15, <2',
-    ])
-else:
-    pass
 
 try:
     # this can fail if numpy or cython isn't installed yet
@@ -72,25 +65,6 @@ else:
 
     # only enable Cython line tracing if we're installing in Travis-CI!
     macros = []
-    try:
-        if os.environ['TRAVIS'] == 'true' and os.environ['CI'] == 'true' \
-                and os.environ['TRAVIS_OS_NAME'] == 'linux' \
-                and 'TRAVIS_TEST_RESULT' not in os.environ:
-            # note: linetracing is temporarily disabled
-            # macros.append(('CYTHON_TRACE', '0'))
-            # CythonOptions.directive_defaults['linetrace'] = False
-
-            # only way of setting linetrace without cythonize?
-            macros.append(('CYTHON_TRACE', '1'))
-            # CythonOptions.directive_defaults['linetrace'] = True
-            cython_defaults = CythonOptions.get_directive_defaults()
-            cython_defaults['linetrace'] = True
-            print('Warning: Enabling line tracing in cython extension.'
-                  'This` will slow it down by a factor of 20 or so!')
-    except (KeyError, ImportError):
-        # KeyError if environment variable is not set,
-        # ImportError if cython is not yet installed
-        pass
     macros.append(('NPY_NO_DEPRECATED_API', 'NPY_1_7_API_VERSION'))
     ext_modules.append(
         Extension(root + '.' + 'mhg_cython', [root + '/mhg_cython.pyx'],
@@ -98,13 +72,6 @@ else:
                   define_macros=macros))
 
     cmdclass['build_ext'] = build_ext
-
-# do not require installation of extensions if built by ReadTheDocs
-# (we mock these modules in docs/source/conf.py)
-if 'READTHEDOCS' in os.environ and os.environ['READTHEDOCS'] == 'True':
-    ext_modules = []  # disable Cython extension
-    if 'build_ext' in cmdclass:
-        del cmdclass['build_ext']
 
 
 # fix version tag for mac
@@ -149,13 +116,13 @@ setup(
     # extensions
     ext_modules=ext_modules,
     cmdclass=cmdclass,
-    install_requires=install_requires,
+    install_requires=requirements,
     extras_require=extras_require,
     tests_require=['pytest'],
     # data
     package_data={
         'xlmhglite': ['xlmhglite/mhg_cython.pyx',
                   'tests/*',
-                  'README.rst', 'LICENSE', 'CHANGELOG.rst'],
+                  'README.rst', 'LICENSE', 'HISTORY.rst'],
     }
 )
