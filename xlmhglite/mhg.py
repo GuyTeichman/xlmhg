@@ -13,7 +13,6 @@ def get_default_tol():
     return float(DEFAULT_TOL)
 
 
-@numba.njit()
 def is_equal(a: float, b: float, tol: float):
     """Ratio test to check if two floating point numbers are equal.
 
@@ -37,7 +36,6 @@ def is_equal(a: float, b: float, tol: float):
         return False
 
 
-@numba.njit()
 def get_hgp(p, k, N, K, n):
     """Calculate the hypergeometric p-value when p = f(k; N,K,n) is already known.
     """
@@ -129,7 +127,6 @@ def get_xlmhg_stat(indices, N, K, X, L, tol=DEFAULT_TOL):
     return stat, cutoff
 
 
-# @numba.njit()
 def get_xlmhg_pval1(N: int, K: int, X: int, L: int, stat: float, tol: float = DEFAULT_TOL):
     """Calculate the XL-mHG p-value using "Algorithm 1".
 
