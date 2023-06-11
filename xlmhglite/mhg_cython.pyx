@@ -1,8 +1,4 @@
-# Copyright (c) 2015-2019 Florian Wagner
-#
-# This file is part of XL-mHG.
-
-#cython: profile=False, wraparound=False, boundscheck=False, cdivision=True
+#cython: language_level=3
 
 """XL-mHG Cython implementation."""
 
