@@ -55,10 +55,10 @@ the following meanings:
 
 __ user_manual_
 
-Documentation
--------------
+XL-mHG Lite Documentation
+---------------------------
 
-Please refer to the `XL-mHG User Manual`__ (hosted on ReadTheDocs).
+Please refer to the `XL-mHG User Manual`__.
 
 __ user_manual_
 

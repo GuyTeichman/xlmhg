@@ -1,9 +1,11 @@
-=======
+
 History
 =======
 
 1.1.0 (2023-06-11)
 ------------------
+This version improves clarity of warning messages and addresses some additional bugs.
+Moreover, the project has been transitioned to use pyproject.toml and setup.cfg, and old code was cleaned up for better maintainability.
 
 Changed
 ********
