@@ -5,14 +5,38 @@
 """Python API for visualizing XL-mHG test results."""
 
 from math import floor, ceil
-# from ABC import Iterable
 
 import numpy as np
-import plotly.graph_objs as go
 
-import xlmhglite
 from xlmhglite import mHGResult
-from xlmhglite.mhg import get_hgp, is_equal
+from xlmhglite.mhg import get_hgp
+
+try:
+    raise ImportError
+    import plotly.graph_objs as go
+except ImportError:
+    class go:
+        class layout:
+            def YAxis(*args, **kwargs):
+                pass
+
+            def Annotation(*args, **kwargs):
+                pass
+
+        def Scatter(*args, **kwargs):
+            pass
+
+        def Figure(*args, **kwargs):
+            pass
+
+        def Layout(*args, **kwargs):
+            pass
+
+        def Annotation(*args, **kwargs):
+            pass
+
+        def YAxis(*args, **kwargs):
+            pass
 
 
 def get_hypergeometric_stats(N, indices):
@@ -27,12 +51,12 @@ def get_hypergeometric_stats(N, indices):
     """
     assert isinstance(N, (int, np.integer))
     assert isinstance(indices, np.ndarray) and \
-            np.issubdtype(indices.dtype, np.uint16)
+           np.issubdtype(indices.dtype, np.uint16)
 
     K = indices.size
 
-    pvals = np.empty(N+1, dtype=np.float64)
-    folds = np.empty(N+1, dtype=np.float64)
+    pvals = np.empty(N + 1, dtype=np.float64)
+    folds = np.empty(N + 1, dtype=np.float64)
     pvals[0] = 1.0
     folds[0] = 1.0
 
@@ -43,19 +67,19 @@ def get_hypergeometric_stats(N, indices):
         if k < K and indices[k] == n:
             # "add one"
             # calculate f(k+1; N,K,n+1) from f(k; N,K,n)
-            p *= (float((n+1) * (K-k)) / \
-                  float((N-n) * (k+1)))
+            p *= (float((n + 1) * (K - k)) / \
+                  float((N - n) * (k + 1)))
             k += 1
         else:
             # "add zero"
             # calculate f(k; N,K,n+1) from f(k; N,K,n)
-            p *= (float((n+1) * (N-K-n+k)) /
-                  float((N-n) * (n-k+1)))
+            p *= (float((n + 1) * (N - K - n + k)) /
+                  float((N - n) * (n - k + 1)))
         n += 1
         # calculate hypergeometric p-value
         pvals[n] = get_hgp(p, k, N, K, n)
         # calculate fold enrichment
-        folds[n] = k / (K*(n/float(N)))
+        folds[n] = k / (K * (n / float(N)))
 
     return pvals, folds
 
@@ -157,7 +181,7 @@ def get_result_figure(
 
     # generate p-value trace
     data.append(go.Scatter(
-        x=np.arange(N+1),
+        x=np.arange(N + 1),
         y=-np.log10(pvals),
         mode='lines',
         line=dict(
@@ -172,20 +196,20 @@ def get_result_figure(
     if plot_fold_enrichment:
         tick_color = score_color
     yaxis = go.layout.YAxis(
-        #title='-log<sub>10</sub>(hypergeom. p-value)',
+        # title='-log<sub>10</sub>(hypergeom. p-value)',
         title='Enrichment score',
         tickfont=dict(
             color=tick_color,
         ),
         autorange=False,
-        #range=[pval_min, pval_max],
+        # range=[pval_min, pval_max],
         range=[pval_min, pval_max],
         showgrid=False,
-        #zeroline=False,
+        # zeroline=False,
         zeroline=False,
         showline=True,
         domain=[0.15, 1.0],
-        #mirror=True,
+        # mirror=True,
     )
 
     # additional y axis at the the bottom,
@@ -274,7 +298,7 @@ def get_result_figure(
     rect1_x1 = 0
     if result.X > 0:
         if result.X < result.K:
-            rect1_x1 = result.indices[result.X-1] + 0.5
+            rect1_x1 = result.indices[result.X - 1] + 0.5
         else:
             rect1_x1 = result.N
     rect1 = {
@@ -290,7 +314,7 @@ def get_result_figure(
     }
     rect2 = {
         'type': 'rect',
-        'x0': L+0.5,
+        'x0': L + 0.5,
         'y0': pval_min,
         'x1': N,
         'y1': pval_max,
@@ -305,9 +329,9 @@ def get_result_figure(
     for n in result.indices:
         bars.append(dict(
             type='line',
-            x0=n+1.0,
+            x0=n + 1.0,
             y0=0.0,
-            x1=n+1.0,
+            x1=n + 1.0,
             y1=1.0,
             line=dict(
                 color='black',
@@ -355,7 +379,7 @@ def get_result_figure(
         'y1': pval_max,
         'line': dict(
             color=cutoff_color,
-            width=1.5*line_width,
+            width=1.5 * line_width,
             dash='dash',
         ),
     }
@@ -395,11 +419,11 @@ def get_result_figure(
         ),
         showlegend=False,
         shapes=[
-            rect1,
-            rect2,
-            line,
-            line2,
-        ] + bars,
+                   rect1,
+                   rect2,
+                   line,
+                   line2,
+               ] + bars,
         title=title,
         annotations=annotations,
     )
