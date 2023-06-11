@@ -695,6 +695,10 @@ Search.setIndex({
         "sphinx": 57
     },
     "alltitles": {
+        "API Reference": [[0, "api-reference"]],
+        "Simple test function - xlmhg_test()": [[0, "simple-test-function-xlmhg-test"]],
+        "Advanced test function - get_xlmhg_test_result()": [[0, "advanced-test-function-get-xlmhg-test-result"]],
+        "Test result objects - mHGResult": [[0, "test-result-objects-mhgresult"]],
         "Statistical Background": [[1, "statistical-background"]],
         "What do the X and L parameters mean?": [[1, "what-do-the-x-and-l-parameters-mean"]],
         "Further reading": [[1, "further-reading"]],
@@ -703,6 +707,12 @@ Search.setIndex({
         "Conducting a test using the simple test function": [[3, "conducting-a-test-using-the-simple-test-function"]],
         "Conducting a test using the advanced test function": [[3, "conducting-a-test-using-the-advanced-test-function"]],
         "Visualizing a test result": [[3, "visualizing-a-test-result"]],
+        "History": [[4, "history"]],
+        "1.1.0 (2023-06-11)": [[4, "id1"]],
+        "Changed": [[4, "changed"]],
+        "Fixed": [[4, "fixed"]],
+        "1.0.1 (2023-06-11)": [[4, "id2"]],
+        "1.0.0 (2023-06-10)": [[4, "id3"]],
         "XL-mHG Lite User Manual": [[5, "xl-mhg-lite-user-manual"]],
         "Contents": [[5, "contents"]],
         "Installation": [[6, "installation"], [8, "installation"]],
@@ -719,17 +729,7 @@ Search.setIndex({
         "Getting started": [[8, "getting-started"]],
         "Documentation": [[8, "id5"]],
         "Citing XL-mHG": [[8, "citing-xl-mhg"]],
-        "Copyright and License": [[8, "copyright-and-license"]],
-        "API Reference": [[0, "api-reference"]],
-        "Simple test function - xlmhg_test()": [[0, "simple-test-function-xlmhg-test"]],
-        "Advanced test function - get_xlmhg_test_result()": [[0, "advanced-test-function-get-xlmhg-test-result"]],
-        "Test result objects - mHGResult": [[0, "test-result-objects-mhgresult"]],
-        "History": [[4, "history"]],
-        "1.1.0 (2023-06-11)": [[4, "id1"]],
-        "Changed": [[4, "changed"]],
-        "Fixed": [[4, "fixed"]],
-        "1.0.1 (2023-06-11)": [[4, "id2"]],
-        "1.0.0 (2023-06-10)": [[4, "id3"]]
+        "Copyright and License": [[8, "copyright-and-license"]]
     },
     "indexentries": {
         "k (xlmhglite.mhgresult property)": [[0, "xlmhglite.mHGResult.K"], [0, "xlmhglite.mHGResult.k"]],
