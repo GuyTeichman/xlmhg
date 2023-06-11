@@ -173,3 +173,11 @@ cython_debug/
 
 /build/xlmhglite/
 /.run/Sphinx Task in Sphinx Task in .run.xml
+/build/lib.win-amd64-cpython-38/xlmhglite/__init__.py
+/build/lib.win-amd64-cpython-38/xlmhglite/mhg.py
+/build/lib.win-amd64-cpython-38/xlmhglite/result.py
+/build/lib.win-amd64-cpython-38/xlmhglite/test.py
+/build/lib.win-amd64-cpython-38/xlmhglite/visualize.py
+/build/temp.win-amd64-cpython-38/Release/xlmhglite/mhg_cython.cp38-win_amd64.exp
+/build/temp.win-amd64-cpython-38/Release/xlmhglite/mhg_cython.cp38-win_amd64.lib
+/build/temp.win-amd64-cpython-38/Release/xlmhglite/mhg_cython.obj

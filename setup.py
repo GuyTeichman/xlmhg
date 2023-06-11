@@ -63,7 +63,6 @@ except ImportError:
 else:
     # tell setuptools to build the Cython extension
 
-    # only enable Cython line tracing if we're installing in Travis-CI!
     macros = []
     macros.append(('NPY_NO_DEPRECATED_API', 'NPY_1_7_API_VERSION'))
     ext_modules.append(
@@ -92,23 +91,24 @@ cmdclass['bdist_wheel'] = CustomBdistWheel
 setup(
     name='xlmhglite',
     version=version,
+    python_requires='>=3.8',
     description=description,
     long_description=long_description,
-    url='https://github.com/flo-compbio/xlmhglite',
+    url='https://github.com/GuyTeichman/xlmhglite',
     author='Guy Teichman',
     author_email='guyteichman@gmail.com',
     license='GPLv3',
     # see https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
         'Topic :: Scientific/Engineering :: Bio-Informatics',
         'License :: OSI Approved :: BSD License',
-        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
         'Programming Language :: Cython',
     ],
     keywords=['statistics', 'nonparametric', 'semiparametric', 'enrichment test', 'ranked lists'],
