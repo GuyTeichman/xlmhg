@@ -4,21 +4,19 @@
 
 """Python API for performing XL-mHG tests."""
 
-import sys
-from math import isnan
 import logging
+from math import isnan
 
 import numpy as np
 
-from . import mhg
+from . import cython_warning
+
 try:
     # This is a duct-tape fix for the Google App Engine, on which importing
     # the C extension fails.
     from . import mhg_cython
 except ImportError:
-    print('Warning (xlmhglite): Failed to import the "mhg_cython" C extension.'
-          'Falling back to the pure Python implementation, which is very '
-          'slow.', file=sys.stderr)
+    cython_warning()
     from . import mhg as mhg_cython
 
 from .result import mHGResult
@@ -41,12 +39,12 @@ def get_xlmhg_O1_bound(stat, K, X, L):
     elif min_KL == 0 or X > min_KL:
         return 0.0
 
-    upper_bound = min((min_KL-max_X1+1)*stat, 1.0)
+    upper_bound = min((min_KL - max_X1 + 1) * stat, 1.0)
     return upper_bound
 
 
 def get_xlmhg_test_result(N, indices, X=None, L=None,
-                          exact_pval='always', # if_necessary, if_significant
+                          exact_pval='always',  # if_necessary, if_significant
                           pval_thresh=None, escore_pval_thresh=None,
                           table=None, use_alg1=False, tol=1e-12):
     """Perform an XL-mHG test.
@@ -110,8 +108,8 @@ def get_xlmhg_test_result(N, indices, X=None, L=None,
     """
     # type checks
     assert isinstance(N, (int, np.integer))
-    assert isinstance(indices, np.ndarray) and indices.ndim == 1 and\
-        np.issubdtype(indices.dtype, np.uint16)
+    assert isinstance(indices, np.ndarray) and indices.ndim == 1 and \
+           np.issubdtype(indices.dtype, np.uint16)
     if X is not None:
         assert isinstance(X, (int, np.integer))
     if L is not None:
@@ -123,7 +121,7 @@ def get_xlmhg_test_result(N, indices, X=None, L=None,
         assert isinstance(escore_pval_thresh, float)
     if table is not None:
         assert isinstance(table, np.ndarray) and table.ndim == 2 and \
-            np.issubdtype(table.dtype, np.longdouble)
+               np.issubdtype(table.dtype, np.longdouble)
     assert isinstance(use_alg1, (bool, np.bool_))
     assert isinstance(tol, float)
 
@@ -144,11 +142,11 @@ def get_xlmhg_test_result(N, indices, X=None, L=None,
         )
     if not (0 <= X <= N):
         raise ValueError(
-            'Invalid value X=%d; should be >= 0 and <= %d.' %(X, N)
+            'Invalid value X=%d; should be >= 0 and <= %d.' % (X, N)
         )
     if not (0 <= L <= N):
         raise ValueError(
-            'Invalid value L=%d; should be >= 0 and <= %d.' %(L, N)
+            'Invalid value L=%d; should be >= 0 and <= %d.' % (L, N)
         )
     if pval_thresh is not None and not (0.0 <= pval_thresh <= 1.0):
         raise ValueError(
@@ -158,7 +156,7 @@ def get_xlmhg_test_result(N, indices, X=None, L=None,
             not (0.0 <= escore_pval_thresh <= 1.0):
         raise ValueError(
             'Invalid value escore_pval_thersh=%.1e; should be in [0,1).'
-                % escore_pval_thresh
+            % escore_pval_thresh
         )
     if not (0.0 <= tol < 1.0):
         raise ValueError('Invalid value tol=%.1e; should be in [0,1).' % tol)
@@ -170,7 +168,7 @@ def get_xlmhg_test_result(N, indices, X=None, L=None,
                          'or "if_significant".')
 
     if exact_pval in ['if_necessary', 'if_significant'] and \
-                    pval_thresh is None:
+            pval_thresh is None:
         raise ValueError('Missing argument: exact_pval=%s requires '
                          'a significance level to be specified (pval_thresh).')
 
@@ -196,12 +194,12 @@ def get_xlmhg_test_result(N, indices, X=None, L=None,
     # large enough. Otherwise, create an empty array.
     W = N - K
     if table is None:
-        table = np.empty((K+1, W+1), dtype = np.longdouble)
-    elif table.shape[0] < K+1 or table.shape[1] < W+1:
+        table = np.empty((K + 1, W + 1), dtype=np.longdouble)
+    elif table.shape[0] < K + 1 or table.shape[1] < W + 1:
         raise ValueError('Supplied array for dynamic programming table not'
                          'large enough. It is: %d x %d, but must be at least '
                          '%d x %d ((K+1) x (W+1)).'
-                         % (table.shape[0], table.shape[1], K+1, W+1))
+                         % (table.shape[0], table.shape[1], K + 1, W + 1))
 
     ### Step 1: Calculate XL-mHG test statistic.
     from xlmhglite import mhg
@@ -263,7 +261,7 @@ def get_xlmhg_test_result(N, indices, X=None, L=None,
             ON_upper_bound = mhg_cython.get_xlmhg_ON_bound(N, K, X, L, stat,
                                                            tol)
             if ON_upper_bound <= pval_thresh or \
-                mhg.is_equal(ON_upper_bound, pval_thresh, tol):
+                    mhg.is_equal(ON_upper_bound, pval_thresh, tol):
                 # The upper bound is "<=" the significance threshold.
                 # This means that the test *is* significant.
                 # => Depending on the value of `exact_pval`, we report either
@@ -296,10 +294,9 @@ def get_xlmhg_test_result(N, indices, X=None, L=None,
             # use PVAL1 algorithm
             pval = mhg_cython.get_xlmhg_pval1(N, K, X, L, stat, table, tol)
 
-
     if isnan(pval) or pval <= 0 or \
             (pval > O1_upper_bound and
-                 (not mhg.is_equal(pval, O1_upper_bound, tol))):
+             (not mhg.is_equal(pval, O1_upper_bound, tol))):
         # insufficient floating point precision for calculating p-value,
         # report O(1)-bound instead
         logger.warning('Insufficient floating point precision for calculating '
@@ -344,7 +341,7 @@ def xlmhg_test(v, X=None, L=None, table=None):
         The XL-mHG p-value (either exact or an upper bound).
     """
     assert isinstance(v, np.ndarray) and v.ndim == 1 \
-        and np.issubdtype(v.dtype, np.integer)
+           and np.issubdtype(v.dtype, np.integer)
     if v.size > 65536:
         raise ValueError('List is too long. The maximum length supported is '
                          ' 65536.')
@@ -352,6 +349,3 @@ def xlmhg_test(v, X=None, L=None, table=None):
     N = v.size
     result = get_xlmhg_test_result(N, indices, X, L, table=table)
     return result.stat, result.cutoff, result.pval
-
-
-

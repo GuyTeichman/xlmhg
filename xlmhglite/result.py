@@ -4,19 +4,19 @@
 
 """Contains the `mHGResult` class."""
 
-import sys
 import hashlib
 import logging
 
 import numpy as np
+
+from . import cython_warning
 
 try:
     # This is a duct-tape fix for the Google App Engine, on which importing
     # the C extension fails.
     from . import mhg_cython
 except ImportError:
-    print('Warning (xlmhglite): Failed to import "mhg_cython" C extension.',
-          file=sys.stderr)
+    cython_warning()
     from . import mhg as mhg_cython
 
 logger = logging.getLogger(__name__)

@@ -5,6 +5,10 @@ History
 1.0.2 (2023-06-12)
 ------------------
 
+Changed
+********
+* Warning messages regarding failed import of the cython module were made more informative.
+
 Fixed
 ******
 * Fixed bug where calculating enrichment scores using the pure Python implementation would raise an AttributeError.
