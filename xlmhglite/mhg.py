@@ -4,7 +4,6 @@
 
 """XL-mHG Python implementation."""
 
-import numba
 import numpy as np
 
 DEFAULT_TOL = 1e-12

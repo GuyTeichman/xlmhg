@@ -8,7 +8,7 @@ History
 Fixed
 ******
 * Fixed bug where calculating enrichment scores using the pure Python implementation would raise an AttributeError.
-
+* Fixed bug where the pure Python implementation would raise an ImportError if numba is not already installed on the system.
 
 1.0.1 (2023-06-11)
 ------------------
