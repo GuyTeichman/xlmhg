@@ -10,6 +10,10 @@ import numpy as np
 DEFAULT_TOL = 1e-12
 
 
+def get_default_tol():
+    return float(DEFAULT_TOL)
+
+
 @numba.njit()
 def is_equal(a: float, b: float, tol: float):
     """Ratio test to check if two floating point numbers are equal.
@@ -124,6 +128,7 @@ def get_xlmhg_stat(indices, N, K, X, L, tol=DEFAULT_TOL):
         i += 1
     stat = min(stat, 1.0)  # because we initially set stat to 1.1
     return stat, cutoff
+
 
 # @numba.njit()
 def get_xlmhg_pval1(N: int, K: int, X: int, L: int, stat: float, tol: float = DEFAULT_TOL):
