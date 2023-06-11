@@ -2,12 +2,13 @@
 History
 =======
 
-1.0.2 (2023-06-12)
+1.1.0 (2023-06-12)
 ------------------
 
 Changed
 ********
 * Warning messages regarding failed import of the cython module were made more informative.
+* Transitioned the project to use pyproject.toml and setup.cfg, and cleaned up legacy code from setup.py.
 
 Fixed
 ******

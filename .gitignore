@@ -182,3 +182,11 @@ cython_debug/
 /build/temp.win-amd64-cpython-38/Release/xlmhglite/mhg_cython.cp38-win_amd64.lib
 /build/temp.win-amd64-cpython-38/Release/xlmhglite/mhg_cython.obj
 /.run/Sphinx Task in Sphinx Task in Sphinx Task in .run.xml
+/build/lib.win-amd64-cpython-39/xlmhglite/__init__.py
+/build/lib.win-amd64-cpython-39/xlmhglite/mhg.py
+/build/lib.win-amd64-cpython-39/xlmhglite/result.py
+/build/lib.win-amd64-cpython-39/xlmhglite/test.py
+/build/lib.win-amd64-cpython-39/xlmhglite/visualize.py
+/build/temp.win-amd64-cpython-39/Release/xlmhglite/mhg_cython.cp39-win_amd64.exp
+/build/temp.win-amd64-cpython-39/Release/xlmhglite/mhg_cython.cp39-win_amd64.lib
+/build/temp.win-amd64-cpython-39/Release/xlmhglite/mhg_cython.obj

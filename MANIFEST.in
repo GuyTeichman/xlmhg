@@ -1,4 +1,4 @@
-recursive-include . *.rst *.ico *.png
+recursive-include . *.rst *.ico *.png *.pyx
 recursive-include . requirements*.txt
 
 recursive-include tests *
