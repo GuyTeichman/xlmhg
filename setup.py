@@ -33,7 +33,7 @@ def get_extra_requires(path, add_all=True):
 here = path.abspath(path.dirname(__file__))
 root = 'xlmhglite'
 description = 'XL-mHG lite: A light implementation of the Semiparametric Enrichment Test'
-version = '1.0.0'
+version = '1.0.1'
 
 with open('README.rst', encoding='utf8') as readme_file:
     readme = readme_file.read()
