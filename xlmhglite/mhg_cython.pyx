@@ -76,7 +76,7 @@ def get_xlmhg_stat(unsigned short[::1] indices, int N, int K, int X, int L,
         n += 1
         if k >= X: # calculate p-value only if enough elements have been seen
             hgp = get_hgp(p, k, N, K, n)
-            if hgp <= stat:
+            if hgp < stat or is_equal(hgp,stat,tol):
                 stat = hgp
                 cutoff = n
         i += 1
