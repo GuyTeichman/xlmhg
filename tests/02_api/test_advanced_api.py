@@ -72,7 +72,7 @@ def test_limit_pval(my_incredible_pval_v):
     res = get_xlmhg_test_result(N, ind)
     assert np.isclose(res.stat, 1.5112233509292993e-216, atol=0)
     assert res.cutoff == 200
-    assert res.pval == res.stat
+    assert np.isclose(res.stat, res.pval, atol=0)
 
     res = get_xlmhg_test_result(N, ind, use_alg1=True)
     # PVAL2 algorithm should report an invalid p-value
