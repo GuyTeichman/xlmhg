@@ -2,10 +2,6 @@ name: Build CI
 
 on: [ push, pull_request, workflow_dispatch ]
 
-
-env:
-  HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
-
 jobs:
   test:
 
@@ -29,24 +25,5 @@ jobs:
           python -m pip install .[all]
       - name: Test with pytest
         run: |
-          coverage run --source=xlmhglite/ -m pytest tests/
+          python -m pytest tests/
         continue-on-error: false
-      - name: Generate lcov file
-        run: coverage lcov
-      - name: Coveralls Parallel
-        uses: coverallsapp/github-action@v2
-        if: runner.os != 'macOS'
-        with:
-          flag-name: run-${{ join(matrix.*, '-') }}
-          parallel: true
-          path-to-lcov: ./coverage.lcov
-
-  finish:
-    needs: test
-    if: ${{ always() }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Coveralls Finished
-        uses: coverallsapp/github-action@v2
-        with:
-          parallel-finished: true
