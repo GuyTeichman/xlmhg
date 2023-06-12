@@ -12,7 +12,6 @@ from xlmhglite import mHGResult
 from xlmhglite.mhg import get_hgp
 
 try:
-    raise ImportError
     import plotly.graph_objs as go
 except ImportError:
     class go:
