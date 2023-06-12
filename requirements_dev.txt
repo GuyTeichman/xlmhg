@@ -16,12 +16,3 @@ coveralls
 py
 pytest
 pytest-runner
-python_docs_theme
-pandas
-pytest-qt
-pytest-mock
-pytest-xvfb
-typing_extensions
-pyinstaller
-pyinstaller-hooks-contrib
-rst-to-myst
