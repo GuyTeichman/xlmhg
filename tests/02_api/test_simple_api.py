@@ -26,9 +26,9 @@ def test_mhg(my_v):
     assert res[1] == 6
     pval_truth = 0.0244453044375645
     if IS_ARM:
-        assert np.isclose(res[1], pval_truth, atol=0)
+        assert np.isclose(res[2], pval_truth, atol=0)
     else:
-        assert res[2] == truth
+        assert res[2] == pval_truth
 
 
 def test_X(my_v):
@@ -36,9 +36,9 @@ def test_X(my_v):
     res = xlmhg_test(my_v, X=4)
     pval_truth = 0.01876934984520124
     if IS_ARM:
-        assert np.isclose(res[1], pval_truth, atol=0)
+        assert np.isclose(res[2], pval_truth, atol=0)
     else:
-        assert res[2] == truth
+        assert res[2] == pval_truth
 
 
 def test_L(my_v):
