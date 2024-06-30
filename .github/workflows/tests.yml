@@ -24,12 +24,6 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install --upgrade -r requirements_dev.txt
           python -m pip install .[all]
-      - name: echo workspace on Windows
-        if: runner.os == 'Windows'
-        run: |
-          echo ${{ github.workspace }}
-          cd ${{ github.workspace }}/../
-          dir
       - name: Test with pytest
         run: |
           cd ${{ github.workspace }}/../
