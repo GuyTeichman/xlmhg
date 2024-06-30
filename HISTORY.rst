@@ -2,6 +2,12 @@
 History
 =======
 
+
+
+1.1.1 (2024-06-30)
+------------------
+xlmhglite now runs on numpy version 2 and above.
+
 1.1.0 (2023-06-11)
 ------------------
 This version improves clarity of warning messages and addresses some additional bugs.

@@ -1,22 +1,21 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Installation &mdash; XL-mHG Lite 1.1.0 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>Installation &mdash; XL-mHG Lite 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/documentation_options.js?v=58fbf978"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -36,7 +35,7 @@
             XL-mHG Lite
           </a>
               <div class="version">
-                  1.1
+                1.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -92,7 +91,7 @@
            <div itemprop="articleBody">
              
   <section id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h1>
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h1>
 <p>Installing the xlmhglite package should be straightforward on Linux,
 Windows, and Mac OS X. It only requires <a class="reference external" href="https://www.python.org/downloads/">Python &gt;= 3.8</a> to be
 installed. If you have a different version of Python, you have to <a class="reference internal" href="#source">install
@@ -111,14 +110,14 @@ can run the following in Python:</p>
 Python packages. The recommended installation procedure on Linux, Windows, and
 Mac OS X is using <a class="reference external" href="https://pip.pypa.io/en/stable/">pip</a>, the main tool for installing Python packages.</p>
 <section id="installing-the-latest-version">
-<h2>Installing the latest version<a class="headerlink" href="#installing-the-latest-version" title="Permalink to this heading">¶</a></h2>
+<h2>Installing the latest version<a class="headerlink" href="#installing-the-latest-version" title="Link to this heading">¶</a></h2>
 <p>To install the latest version of the <a class="reference external" href="https://pypi.python.org/pypi/xlmhglite">xlmhglite</a> Python package, run:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pip install xlmhglite
 </pre></div>
 </div>
 </section>
 <section id="installing-a-specific-version">
-<h2>Installing a specific version<a class="headerlink" href="#installing-a-specific-version" title="Permalink to this heading">¶</a></h2>
+<h2>Installing a specific version<a class="headerlink" href="#installing-a-specific-version" title="Link to this heading">¶</a></h2>
 <p>To install a specific version of the <a class="reference external" href="https://pypi.python.org/pypi/xlmhglite">xlmhglite</a> Python package, e.g., “2.3.1”,
 run:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pip install xlmhglite==2.3.1
@@ -126,7 +125,7 @@ run:</p>
 </div>
 </section>
 <section id="specifying-a-version-range">
-<h2>Specifying a version range<a class="headerlink" href="#specifying-a-version-range" title="Permalink to this heading">¶</a></h2>
+<h2>Specifying a version range<a class="headerlink" href="#specifying-a-version-range" title="Link to this heading">¶</a></h2>
 <p>XL-mHG follows <a class="reference external" href="http://semver.org/">semantic versioning</a>, so changes in the major release number
 (e.g., 1.x.x vs. 2.x.x) indicate a backwards-incompatible API change. To
 install the latest version of a specific major release number (e.g., “2.x.x”),
@@ -136,21 +135,21 @@ run:</p>
 </div>
 </section>
 <section id="installation-from-source">
-<span id="source"></span><h2>Installation from source<a class="headerlink" href="#installation-from-source" title="Permalink to this heading">¶</a></h2>
+<span id="source"></span><h2>Installation from source<a class="headerlink" href="#installation-from-source" title="Link to this heading">¶</a></h2>
 <p>This installation method is only required for Python versions other than 2.7
 or 3.5. The installation command is the same (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">xlmhglite</span></code>), but
 the installation involves the compilation of C source code using a C compiler.
 The procedure for installing an appropriate compiler is different for different
 operating systems.</p>
 <section id="ubuntu-linux">
-<h3>Ubuntu Linux<a class="headerlink" href="#ubuntu-linux" title="Permalink to this heading">¶</a></h3>
+<h3>Ubuntu Linux<a class="headerlink" href="#ubuntu-linux" title="Link to this heading">¶</a></h3>
 <p>Do the following to install the gcc compiler (requires root privileges):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>build-essential
 </pre></div>
 </div>
 </section>
 <section id="windows">
-<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this heading">¶</a></h3>
+<h3>Windows<a class="headerlink" href="#windows" title="Link to this heading">¶</a></h3>
 <p>For Python 2.6-3.2, use the Microsoft Visual Studio 2008 compiler
 (<a class="reference external" href="https://www.microsoft.com/en-us/download/details.aspx?id=29">32-bit</a> / <a class="reference external" href="https://www.microsoft.com/en-us/download/details.aspx?id=15336">64-bit</a>). For Python 3.3 and 3.4, use the Visual Studio
 2010 compiler (<a class="reference external" href="https://www.microsoft.com/en-us/download/details.aspx?id=5555">32-bit</a> / <a class="reference external" href="https://www.microsoft.com/en-us/download/details.aspx?id=14632">64-bit</a>).</p>

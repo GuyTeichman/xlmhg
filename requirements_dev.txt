@@ -1,6 +1,5 @@
 scipy
 sphinx-rtd-theme
-sphinxcontrib-napoleon
 mock
 pip
 bump2version
