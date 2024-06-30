@@ -25,7 +25,5 @@ jobs:
           python -m pip install --upgrade -r requirements_dev.txt
           python -m pip install .[all]
       - name: Test with pytest
-        run: |
-          cd $GITHUB_WORKSPACE/../
-          python -m pytest $GITHUB_WORKSPACE/tests/
+        run: python -m pytest tests/
         continue-on-error: false
