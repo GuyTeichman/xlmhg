@@ -119,7 +119,7 @@ def get_xlmhg_stat(indices, N, K, X, L, tol=DEFAULT_TOL):
         n += 1
         if k >= X:  # calculate p-value only if enough elements have been seen
             hgp = get_hgp(p, k, N, K, n)
-            if hgp <= stat:
+            if hgp < stat or is_equal(hgp,stat,tol):
                 stat = hgp
                 cutoff = n
         i += 1

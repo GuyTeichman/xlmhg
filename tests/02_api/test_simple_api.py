@@ -5,9 +5,12 @@
 """Tests for the simple Python API (`xlmhg_test`)."""
 
 import numpy as np
+import platform
 import pytest
 
 from xlmhglite import mHGResult, xlmhg_test, get_xlmhg_test_result
+
+IS_ARM = platform.processor() == 'arm'
 
 
 @pytest.fixture
@@ -19,15 +22,23 @@ def my_indices(my_v):
 def test_mhg(my_v):
     # test regular mHG test
     res = xlmhg_test(my_v)
-    assert np.isclose(res[0], 0.01393188854489164,atol=0)
+    assert np.isclose(res[0], 0.01393188854489164, atol=0)
     assert res[1] == 6
-    assert res[2] == 0.0244453044375645
+    pval_truth = 0.0244453044375645
+    if IS_ARM:
+        assert np.isclose(res[2], pval_truth, atol=0)
+    else:
+        assert res[2] == pval_truth
 
 
 def test_X(my_v):
     # test effect of X
     res = xlmhg_test(my_v, X=4)
-    assert res[2] == 0.01876934984520124
+    pval_truth = 0.01876934984520124
+    if IS_ARM:
+        assert np.isclose(res[2], pval_truth, atol=0)
+    else:
+        assert res[2] == pval_truth
 
 
 def test_L(my_v):

@@ -42,7 +42,7 @@ def get_xlmhg_stat_slow(v, X, L, tol=1e-12):
             k += 1
         if k >= X:
             hgp = hypergeom.sf(k - 1, N, K, i + 1)
-            if hgp < stat and not mhg.is_equal(hgp, stat, tol):
+            if hgp < stat or mhg.is_equal(hgp, stat, tol):
                 stat = hgp
                 n_star = i + 1
 
